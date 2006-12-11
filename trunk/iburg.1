@@ -1,5 +1,5 @@
 .TH IBURG 1 "local \- 1/26/93"
-.\" $Id: iburg.1 24 1996-05-02 19:35:40Z drh $
+.\" $Id: iburg.1 31 1996-05-07 21:14:49Z drh $
 .SH NAME
 iburg \- code generator generator
 .SH SYNOPSIS
@@ -202,6 +202,14 @@ Use
 .I prefix
 as the disambiquating prefix for exported names and visible fields.
 The default is `\f(CWburm\fP'.
+.TP
+.BI \-maxcost= ddd
+Use the integral value
+.I ddd
+as the maximum cost.
+The default is \f(CWSHRT_MAX\fR
+when ints are bigger than shorts, and
+\f(CWSHRT_MAX\fP/2 when ints and shorts are the same size.
 .TP
 .B \-I
 Emit code for the following data values and functions.
