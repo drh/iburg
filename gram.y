@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdio.h>
 #include "iburg.h"
-static char rcsid[] = "$Id: gram.y 28 1996-05-07 18:09:02Z drh $";
+static char rcsid[] = "$Id: gram.y 30 1996-05-07 21:14:49Z drh $";
 static int yylineno = 0;
 %}
 %union {
@@ -56,12 +56,15 @@ tree	: ID                            { $$ = tree($1, NULL, NULL); }
 	;
 
 cost	: /* lambda */			{ $$ = 0; }
-	| '(' INT ')'			{ $$ = $2; }
+	| '(' INT ')'			{ if ($2 > maxcost) {
+						yyerror("%d exceeds maximum cost of %d\n", $2, maxcost);
+						$$ = maxcost;
+					} else
+						$$ = $2; }
 	;
 %%
 #include <stdarg.h>
 #include <ctype.h>
-#include <limits.h>
 
 int errcnt = 0;
 FILE *infp = NULL;
@@ -132,11 +135,7 @@ int yylex(void) {
 		} else if (isdigit(c)) {
 			int n = 0;
 			do {
-				int d = c - '0';
-				if (n > (SHRT_MAX - d)/10)
-					yyerror("integer greater than %d\n", SHRT_MAX);
-				else
-					n = 10*n + d;
+				n = 10*n + (c - '0');
 				c = get();
 			} while (isdigit(c));
 			bp--;
