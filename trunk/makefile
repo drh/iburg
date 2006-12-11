@@ -1,4 +1,4 @@
-# $Id: makefile 45 1997-08-12 17:19:04Z drh $
+# $Id$
 O=.o
 E=
 CFLAGS=
