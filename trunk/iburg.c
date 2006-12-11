@@ -3,9 +3,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <limits.h>
 #include "iburg.h"
 
-static char rcsid[] = "$Id: iburg.c 5 1993-03-27 11:35:48Z drh $";
+static char rcsid[] = "$Id: iburg.c 22 1996-05-02 19:33:03Z drh $";
 static char *prefix = "burm";
 static int Iflag = 0, Tflag = 0;
 static int ntnumber = 0;
@@ -430,7 +431,7 @@ static void emitfuncs(void) {
 	print("int %Pop_label(NODEPTR_TYPE p) {\n"
 "%1%Passert(p, PANIC(\"NULL tree in %Pop_label\\n\"));\n"
 "%1return OP_LABEL(p);\n}\n\n");
-	print("int %Pstate_label(NODEPTR_TYPE p) {\n"
+	print("STATE_TYPE %Pstate_label(NODEPTR_TYPE p) {\n"
 "%1%Passert(p, PANIC(\"NULL tree in %Pstate_label\\n\"));\n"
 "%1return STATE_LABEL(p);\n}\n\n");
 	print("NODEPTR_TYPE %Pchild(NODEPTR_TYPE p, int index) {\n"
@@ -442,8 +443,10 @@ static void emitfuncs(void) {
 
 /* emitheader - emit initial definitions */
 static void emitheader(void) {
-	print("#ifndef ALLOC\n#define ALLOC(n) malloc(n)\n#endif\n\n"
-"#ifndef %Passert\n#define %Passert(x,y) if (!(x)) { extern void abort(void); y; abort(); }\n#endif\n\n");
+	print("#include <limits.h>\n#include <stdlib.h>\n");
+	print("#ifndef STATE_TYPE\n#define STATE_TYPE int\n#endif\n");
+	print("#ifndef ALLOC\n#define ALLOC(n) malloc(n)\n#endif\n"
+"#ifndef %Passert\n#define %Passert(x,y) if (!(x)) { y; abort(); }\n#endif\n\n");
 	if (Tflag)
 		print("static NODEPTR_TYPE %Pnp;\n\n");
 }
@@ -513,7 +516,7 @@ static void emitlabel(Nonterm start) {
 "%3STATE_LABEL(LEFT_CHILD(p)),\n%3STATE_LABEL(RIGHT_CHILD(p)));\n%2break;\n"
 "%1}\n}\n\n");
 	print(
-"int %Plabel(NODEPTR_TYPE p) {\n%1%Plabel1(p);\n"
+"STATE_TYPE %Plabel(NODEPTR_TYPE p) {\n%1%Plabel1(p);\n"
 "%1return ((struct %Pstate *)STATE_LABEL(p))->rule.%P%S ? STATE_LABEL(p) : 0;\n"
 "}\n\n", start);
 }
@@ -542,7 +545,7 @@ static void emitleaf(Term p, int ntnumber) {
 		rule = alloc((ntnumber + 1)*sizeof *rule);
 	}
 	for (i = 0; i <= ntnumber; i++) {
-		cost[i] = 32767;
+		cost[i] = SHRT_MAX;
 		rule[i] = NULL;
 	}
 	for (r = p->rules; r; r = r->next)
@@ -553,7 +556,7 @@ static void emitleaf(Term p, int ntnumber) {
 		}
 	print("%2{\n%3static struct %Pstate z = { %d, 0, 0,\n%4{%10,\n", p->esn);
 	for (i = 1; i <= ntnumber; i++)
-		if (cost[i] < 32767)
+		if (cost[i] < SHRT_MAX)
 			print("%5%d,%1/* %R */\n", cost[i], rule[i]);
 		else
 			print("%5%d,\n", cost[i]);
@@ -563,7 +566,7 @@ static void emitleaf(Term p, int ntnumber) {
 			print("%5%d,%1/* %R */\n", rule[i]->packed, rule[i]);
 		else
 			print("%50,\n");
-	print("%4}\n%3};\n%3return (int)&z;\n%2}\n");
+	print("%4}\n%3};\n%3return (STATE_TYPE)&z;\n%2}\n");
 }
 
 /* computents - fill in bp with burm_nts vector for tree t */
@@ -631,7 +634,7 @@ static void emitrule(Nonterm nts) {
 			print("%1%d,\n", r->ern);
 		print("};\n\n");
 	}
-	print("int %Prule(int state, int goalnt) {\n"
+	print("int %Prule(STATE_TYPE state, int goalnt) {\n"
 "%1%Passert(goalnt >= 1 && goalnt <= %d, PANIC(\"Bad goal nonterminal %%d in %Prule\\n\", goalnt));\n"
 "%1if (!state)\n%2return 0;\n%1switch (goalnt) {\n", ntnumber);
 	for (p = nts; p; p = p->link)
@@ -645,22 +648,22 @@ static void emitstate(Term terms, Nonterm start, int ntnumber) {
 	int i;
 	Term p;
 
-	print("int %Pstate(int op, int left, int right) {\n%1int c;\n"
+	print("STATE_TYPE %Pstate(int op, STATE_TYPE left, STATE_TYPE right) {\n%1int c;\n"
 "%1struct %Pstate *p, *l = (struct %Pstate *)left,\n"
-"%2*r = (struct %Pstate *)right;\n\n%1assert(sizeof (int) >= sizeof (void *));\n%1");
+"%2*r = (struct %Pstate *)right;\n\n%1assert(sizeof (STATE_TYPE) >= sizeof (void *));\n%1");
 	if (!Tflag)
 		print("if (%Parity[op] > 0) ");
-	print("{\n%2p = (void *)ALLOC(sizeof *p);\n"
+	print("{\n%2p = ALLOC(sizeof *p);\n"
 "%2%Passert(p, PANIC(\"ALLOC returned NULL in %Pstate\\n\"));\n"
 "%2p->op = op;\n%2p->left = l;\n%2p->right = r;\n%2p->rule.%P%S = 0;\n", start);
 	for (i = 1; i <= ntnumber; i++)
 		print("%2p->cost[%d] =\n", i);
-	print("%332767;\n%1}\n%1switch (op) {\n");
+	print("%3%d;\n%1}\n%1switch (op) {\n", SHRT_MAX);
 	for (p = terms; p; p = p->link)
 		emitcase(p, ntnumber);
 	print("%1default:\n"
 "%2%Passert(0, PANIC(\"Bad operator %%d in %Pstate\\n\", op));\n%1}\n"
-"%1return (int)p;\n}\n\n");
+"%1return (STATE_TYPE)p;\n}\n\n");
 }
 
 /* emitstring - emit array of rules and costs */
