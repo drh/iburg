@@ -9,6 +9,7 @@ README		this file
 COPYRIGHT	copyright notice
 LOG		summary of most recent changes
 makefile	Make specification
+custom.mk	empty makefile customization
 iburg.c		source code for most of iburg
 gram.y		YACC input for burg grammars
 gram.c		YACC output (for those without YACC or bison)
@@ -80,4 +81,4 @@ body; `Subject:' lines are ignored.
 Mail bug reports along with the shortest input that exposes them to
 drh@microsoft.com.
 
-$Id: README 45 1997-08-12 17:19:04Z drh $
+$Id: README 48 1997-08-12 17:48:21Z drh $
