@@ -1,7 +1,7 @@
 #ifndef BURG_INCLUDED
 #define BURG_INCLUDED
 
-/* $Id: iburg.h 20 1996-05-02 19:29:00Z drh $ */
+/* $Id: iburg.h 33 1996-05-07 21:14:49Z drh $ */
 /* iburg.c: */
 extern void *alloc(int nbytes);
 
@@ -52,6 +52,7 @@ struct rule {		/* rules: */
 	Rule kids;		/* next rule with same burm_kids pattern */
 };
 extern Rule rule(char *id, Tree pattern, int ern, int cost);
+extern int maxcost;		/* maximum cost */
 
 /* gram.y: */
 void yyerror(char *fmt, ...);
