@@ -1,5 +1,5 @@
 .TH IBURG 1 "local \- 1/26/93"
-.\" $Id: iburg.1 8 1993-07-20 18:08:13Z drh $
+.\" $Id: iburg.1 24 1996-05-02 19:35:40Z drh $
 .SH NAME
 iburg \- code generator generator
 .SH SYNOPSIS
@@ -167,6 +167,7 @@ when it detects an error.
 If the configuration section defines these operations as macros, they are implemented in-line;
 otherwise, they must be implemented as functions.
 .PP
+By default,
 \f(CWburm\fP
 computes and stores a single integral state in each node of the subject tree.
 The configuration section must define a macro
@@ -174,6 +175,11 @@ The configuration section must define a macro
 to access the state field of the node pointed to
 by \f(CWp\fP. It must be large enough to hold a pointer, and
 a macro is required because it is used as an lvalue.
+The configuration section may define the macro
+\f(CWSTATE_TYPE\fP
+to specify a different type for state values; if
+\f(CWSTATE_TYPE\fP
+is not defined, int is used.
 .PP
 The configuration section may also define
 \f(CWALLOC(n)\fP
@@ -209,7 +215,7 @@ Emit code for the following data values and functions.
     short burm_cost[][4];
     int burm_op_label(NODEPTR_TYPE p);
     NODEPTR_TYPE burm_child(NODEPTR_TYPE p, int index);
-    int burm_state_label(NODEPTR_TYPE p);
+    STATE_TYPE burm_state_label(NODEPTR_TYPE p);
 .sp
 .fi
 .ft R
@@ -249,7 +255,7 @@ is the cost of the best previous match. The current match
 wins only if
 \f(CWcost\fP
 is less than \f(CWbestcost\fP.
-32767 represents the infinite cost of no previous match.
+SHRT_MAX represents the infinite cost of no previous match.
 \f(CWburm_trace\fP must be declared in the configuration section.
 .SH "SEE ALSO"
 C. W. Fraser, R. R. Henry and T. A. Proebsting,
