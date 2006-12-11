@@ -1,9 +1,9 @@
 pkg/iburg -- created Fri Mar 24 11:44:53 EST 1995 by drh
 current owner drh
 
-iburg is available for anonymous ftp from ftp.cs.princeton.edu
-(128.112.169.21) in pub/packages/iburg.tar.gz or
-pub/packages/iburg.zip. Both archives contain the following files.
+iburg is available for anonymous ftp from ftp.cs.princeton.edu in
+/pub/packages/iburg.tar.gz or /pub/packages/iburg.zip. Both archives
+contain the following files.
 
 README		this file
 COPYRIGHT	copyright notice
@@ -16,28 +16,30 @@ iburg.h		header file for iburg.c and gram.y
 iburg.1		iburg man page
 burg.ps		PostScript for
 		C. W. Fraser, R. R. Henry and T. A. Proebsting,
-		`BURG -- Fast optimal instruction selection and tree parsing,'
+		"BURG -- Fast optimal instruction selection and tree parsing,"
 		SIGPLAN Notices 27, 4 (Apr. 1992), 68-76. 9 pages.
 iburg.ps	PostScript for
 		C. W. Fraser, D. R. Hanson and T. A. Proebsting,
-		`Engineering a simple, efficient code generator generator,'
+		"Engineering a simple, efficient code generator generator,"
 		ACM Letters on Programming Languages and Systems 1,
-		3, (Sep. 1992), 213-226.
+		3, (Sep. 1992), 213-226. (Also available as PDF at
+		http://www.research.microsoft.com/~drh/pubs/iburg.pdf.)
 *.brg		test files
 RCS/*		RCS archives
 
 iburg is written in and generates ANSI C and thus must be compiled with
 an ANSI C compiler and preprocessor, e.g., gcc or lcc. To compile
-iburg, type `make'. There should be no warnings or errors (except
+iburg, type "make". There should be no warnings or errors (except
 perhaps in the system-dependent YACC skeleton).
 
 sample.brg is from the paper in burg.ps, sample4.brg is from the paper
 in iburg.ps, and sample5.brg is an example from a compilers course.
-`make test' runs iburg on sample[45].brg and executes the resulting
-programs. The output should be
+"make test" runs iburg on sample[45].brg and executes the resulting
+programs. The output should be something like:
 
 % make test
-iburg -I sample4.brg sample4.c; cc sample4.c; a.out
+./iburg -I sample4.brg sample4.c; cc -o test4 sample4.c; ./test4
+sample4.c
 i = c + 4;
 stmt: ASGNI(disp,reg)
  disp: ADDRLP
@@ -46,7 +48,8 @@ stmt: ASGNI(disp,reg)
    reg: CVCI(INDIRC(disp))
     disp: ADDRLP
    con: CNSTI
-iburg -I sample5.brg sample5.c; cc sample5.c; a.out
+./iburg -I sample5.brg sample5.c; cc -o test5 sample5.c; ./test5
+sample5.c
 stm: MOVE(MEM(loc),reg)
  loc: NAME
  reg: PLUS(MEM(loc),reg)
@@ -58,13 +61,13 @@ stm: MOVE(MEM(loc),reg)
 %
 
 To install iburg, copy it and its man page to the appropriate local
-directories, e.g.,
+directories, e.g., on UNIX:
 
-	cp iburg /usr/local
-	cp iburg.1 /usr/local/man/man1
+% cp iburg /usr/local
+% cp iburg.1 /usr/local/man/man1
 
-`make clobber' removes iburg and all derived files except gram.c;
-`make clean' removes just .o, core, and sample*.c files.
+"make clobber" removes the executables and all derived files except
+gram.c; "make clean" removes just object, core, and sample*.c files.
 
 To be added to the iburg mailing list, which announces new versions,
 etc., send a message with the 1-line body
@@ -75,6 +78,6 @@ to majordomo@cs.princeton.edu. This line must appear in the message
 body; `Subject:' lines are ignored.
 
 Mail bug reports along with the shortest input that exposes them to
-drh@cs.princeton.edu.
+drh@microsoft.com.
 
-$Id: README 38 1996-06-04 17:10:18Z drh $
+$Id: README 45 1997-08-12 17:19:04Z drh $

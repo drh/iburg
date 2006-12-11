@@ -1,19 +1,23 @@
+# $Id: makefile 45 1997-08-12 17:19:04Z drh $
+O=.o
+E=
 CFLAGS=
 LDFLAGS=
 YFLAGS=
-OBJS=iburg.o gram.o
+OBJS=iburg$O gram$O
+CUSTOM=custom.mk
+include $(CUSTOM)
 
-iburg:		iburg.o gram.o
-		$(CC) -o iburg $(LDFLAGS) $(OBJS)
+iburg$E:	$(OBJS);	$(CC) -o $@ $(LDFLAGS) $(OBJS)
 
 $(OBJS):	iburg.h
 
-test:		iburg sample4.brg sample5.brg
-		iburg -I sample4.brg sample4.c; $(CC) sample4.c; a.out
-		iburg -I sample5.brg sample5.c; $(CC) sample5.c; a.out
+test:		iburg$E sample4.brg sample5.brg
+		./iburg$E -I sample4.brg sample4.c; $(CC) -o test4$E sample4.c; ./test4$E
+		./iburg$E -I sample5.brg sample5.c; $(CC) -o test5$E sample5.c; ./test5$E
 
-clean:
-		rm -f *.o core sample*.c a.out
+clean::
+		rm -f *$O core sample*.c a.out test4$E test5$E
 
-clobber:	clean
-		rm -f y.tab.c gram.tab.c iburg
+clobber::	clean
+		rm -f y.tab.c gram.tab.c iburg$E
