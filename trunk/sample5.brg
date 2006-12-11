@@ -23,7 +23,7 @@ static void burm_trace(NODEPTR_TYPE p, int eruleno, int cost, int bestcost) {
 #ifdef TRACE
 	extern char *burm_string[];
 
-	fprintf(stderr, "0x%x matched %s with cost %d vs. %d\n", p,
+	fprintf(stderr, "0x%p matched %s with cost %d vs. %d\n", p,
 		burm_string[eruleno], cost, bestcost);
 #endif
 }
