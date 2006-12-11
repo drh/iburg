@@ -1,7 +1,7 @@
 %{
 #include <stdio.h>
 #include "iburg.h"
-static char rcsid[] = "$Id: gram.y 2 1993-01-29 22:04:04Z drh $";
+static char rcsid[] = "$Id: gram.y 4 1993-02-23 07:22:21Z drh $";
 %}
 %union {
 	int n;
@@ -162,6 +162,6 @@ void yywarn(char *fmt, ...) {
 	va_start(ap, fmt);
 	if (yylineno > 0)
 		fprintf(stderr, "line %d: ", yylineno);
-	fprintf(stderr, "warhing: ");
+	fprintf(stderr, "warning: ");
 	vfprintf(stderr, fmt, ap);
 }
