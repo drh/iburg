@@ -7,10 +7,11 @@
 
 enum { MOVE=1, MEM=2, PLUS=3, NAME=4, CONST=6 };
 
+#define STATE_TYPE void*
 typedef struct tree {
 	int op;
 	struct tree *kids[2];
-	int state_label;
+	STATE_TYPE state_label;
 } *NODEPTR_TYPE;
 #define OP_LABEL(p) ((p)->op)
 #define LEFT_CHILD(p) ((p)->kids[0])
