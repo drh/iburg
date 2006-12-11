@@ -1,8 +1,8 @@
 %{
+#include <string.h>
 #include <stdio.h>
-#include <limits.h>
 #include "iburg.h"
-static char rcsid[] = "$Id: gram.y 21 1996-05-02 19:31:17Z drh $";
+static char rcsid[] = "$Id: gram.y 28 1996-05-07 18:09:02Z drh $";
 static int yylineno = 0;
 %}
 %union {
@@ -61,7 +61,7 @@ cost	: /* lambda */			{ $$ = 0; }
 %%
 #include <stdarg.h>
 #include <ctype.h>
-#include <string.h>
+#include <limits.h>
 
 int errcnt = 0;
 FILE *infp = NULL;
