@@ -27,8 +27,8 @@ iburg.ps	PostScript for
 RCS/*		RCS archives
 
 iburg is written in and generates ANSI C and thus must be compiled with
-an ANSI C compiler and preprocessor, e.g., gcc or lccTo compile
-iburg, type `make'There should be no warnings or errors (except
+an ANSI C compiler and preprocessor, e.g., gcc or lcc. To compile
+iburg, type `make'. There should be no warnings or errors (except
 perhaps in the system-dependent YACC skeleton).
 
 sample.brg is from the paper in burg.ps, sample4.brg is from the paper
@@ -72,4 +72,4 @@ etc., send your preferred email address to drh@cs.princeton.edu.
 Mail bug reports along with the shortest input that exposes them to
 drh@cs.princeton.edu.
 
-$Id: README 25 1996-05-02 19:51:50Z drh $
+$Id: README 26 1996-05-03 20:50:16Z drh $
