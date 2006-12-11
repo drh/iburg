@@ -1,14 +1,16 @@
 %{
 #include <stdio.h>
+#include <limits.h>
 #include "iburg.h"
-static char rcsid[] = "$Id: gram.y 4 1993-02-23 07:22:21Z drh $";
+static char rcsid[] = "$Id: gram.y 21 1996-05-02 19:31:17Z drh $";
+static int yylineno = 0;
 %}
 %union {
 	int n;
 	char *string;
 	Tree tree;
 }
-%term TERM
+%term TERMINAL
 %term START
 %term PPERCENT
 
@@ -26,7 +28,7 @@ decls	: /* lambda */
 	| decls decl
 	;
 
-decl	: TERM  blist '\n'
+decl	: TERMINAL blist '\n'
 	| START lhs   '\n'		{
 		if (nonterm($2)->number != 1)
 			yyerror("redeclaration of the start symbol\n");
@@ -48,9 +50,9 @@ rules	: /* lambda */
 lhs	: ID				{ nonterm($$ = $1); }
 	;
 
-tree	: ID                            { $$ = tree($1,  0,  0); }
-	| ID '(' tree ')'               { $$ = tree($1, $3,  0); }
-	| ID '(' tree ',' tree ')'      { $$ = tree($1, $3, $5); }
+tree	: ID                            { $$ = tree($1, NULL, NULL); }
+	| ID '(' tree ')'               { $$ = tree($1,   $3, NULL); }
+	| ID '(' tree ',' tree ')'      { $$ = tree($1,   $3, $5); }
 	;
 
 cost	: /* lambda */			{ $$ = 0; }
@@ -65,7 +67,6 @@ int errcnt = 0;
 FILE *infp = NULL;
 FILE *outfp = NULL;
 static char buf[BUFSIZ], *bp = buf;
-static int yylineno = 0;
 static int ppercent = 0;
 
 static int get(void) {
@@ -123,7 +124,7 @@ int yylex(void) {
 		} else if (c == '%' && strncmp(bp, "term", 4) == 0
 		&& isspace(bp[4])) {
 			bp += 4;
-			return TERM;
+			return TERMINAL;
 		} else if (c == '%' && strncmp(bp, "start", 5) == 0
 		&& isspace(bp[5])) {
 			bp += 5;
@@ -131,11 +132,13 @@ int yylex(void) {
 		} else if (isdigit(c)) {
 			int n = 0;
 			do {
-				n = 10*n + (c - '0');
+				int d = c - '0';
+				if (n > (SHRT_MAX - d)/10)
+					yyerror("integer greater than %d\n", SHRT_MAX);
+				else
+					n = 10*n + d;
 				c = get();
 			} while (isdigit(c));
-			if (n > 32767)
-				yyerror("integer %d greater than 32767\n", n);
 			bp--;
 			yylval.n = n;
 			return INT;
