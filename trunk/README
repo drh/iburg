@@ -7,9 +7,11 @@ contain the following files.
 
 README		this file
 COPYRIGHT	copyright notice
+LOG		summary of most recent changes
 makefile	Make specification
 iburg.c		source code for most of iburg
 gram.y		YACC input for burg grammars
+gram.c		YACC output (for those without YACC or bison)
 iburg.h		header file for iburg.c and gram.y
 iburg.1		iburg man page
 burg.ps		PostScript for
@@ -23,10 +25,10 @@ iburg.ps	PostScript for
 		3, (Sep. 1992), 213-226.
 *.brg		test files
 
-
 iburg is written in and generates ANSI C and thus must be compiled with
-an ANSI C compiler and preprocessor, e.g., gcc or lcc.  To compile
-iburg, type `make'.  There should be no warnings or errors.
+an ANSI C compiler and preprocessor, e.g., gcc or lccTo compile
+iburg, type `make'There should be no warnings or errors (except
+perhaps in the system-dependent YACC skeleton).
 
 sample.brg is from the paper in burg.ps, sample4.brg is from the paper
 in iburg.ps, and sample5.brg is an example from a compilers course.
@@ -60,8 +62,8 @@ directories, e.g.,
 	cp iburg /usr/local
 	cp iburg.1 /usr/local/man/man1
 
-`make clobber' removes all derived files, including iburg; `make clean'
-removes just .o, core, and sample*.c files.
+`make clobber' removes iburg and all derived files except gram.c;
+`make clean' removes just .o, core, and sample*.c files.
 
 To be added to the iburg mailing list, which announces new versions,
 etc., send your preferred email address to drh@cs.princeton.edu.
@@ -69,5 +71,4 @@ etc., send your preferred email address to drh@cs.princeton.edu.
 Mail bug reports along with the shortest input that exposes them to
 drh@cs.princeton.edu.
 
-modified Fri Mar 24 11:46:12 EST 1995 by drh
-created  Thu May 12 11:33:48 EDT 1994 by drh
+$Id: README 23 1996-05-02 19:35:24Z drh $
