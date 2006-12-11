@@ -17,4 +17,4 @@ iburg.zip:	$(FILES)
 		d=`pwd`; cd /temp; zip $$d/$@ custom.mk
 
 clobber::	clean
-		rm -r y.tab.c gram.c iburg.zip *.ilk *.pdb
+		rm -f y.tab.c gram.c iburg.zip *.ilk *.pdb
