@@ -24,16 +24,23 @@ ANSI C. <code>iburg</code> is described in</p>
   <cite>ACM Letters on Programming Languages and Systems</cite> &nbsp;<strong>1</strong>, 3
   (Sep. 1992), 213-226. <a href="iburg.pdf">PDF</a> (157KB); <a HREF="iburg.ps.gz">Compressed Postscript</a> (59KB).</p>
 </blockquote>
-
-<p>The source code is available in <a
+		<p>The source code is available in <a
 HREF="ftp://ftp.cs.princeton.edu/pub/packages/iburg.tar.gz"><code>iburg.tar.gz</code></a>
 (142KB) or <a HREF="ftp://ftp.cs.princeton.edu/pub/packages/iburg.zip"><code>iburg.zip</code></a>
 (149KB); the <code><a HREF="pkg/README">README</a></code> file elaborates. The <code><a
 HREF="pkg/LOG">LOG</a></code> file describes recent changes. You can also <a HREF="pkg">browse the
 source code</a>.</p>
-
-<hr>
+		<p>The source code is also available via anonymous CVS at cvs.cs.princeton.edu. The command</p>
+		<blockquote>
+			<code>cvs -d :ext:anon-iburg@cvs.cs.princeton.edu:/cvs co -d iburg .</code></blockquote>
+		<p>creates the directory <code>iburg</code> and populates it from the source tree. This command is equivalent to the commands</p>
+		<blockquote>
+			<code>mkdir iburg<br>
+				cd iburg<br>
+				cvs -d :ext:anon-iburg@cvs.cs.princeton.edu:/cvs co .</code></blockquote>
+		<p>Hit return if you're prompted for a password, and ignore diagnostics about missing home directories. Visit <a href="http://cvs.cs.princeton.edu">http://cvs.cs.princeton.edu</a> for more information about the Princeton CVS server.</p>
+		<hr>
 
 <address>
- $Id: index.html 64 2005-02-26 05:52:50Z drh-iburg $
+ $Id: index.html 65 2005-03-04 05:37:11Z drh-iburg $
 </body>
