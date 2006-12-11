@@ -1,5 +1,12 @@
-pkg/iburg -- created Fri Mar 24 11:44:53 EST 1995 by drh
-current owner drh
+Iburg -- A Code Generator Generator
+
+iburg is a code-generator generator that uses dynamic programming at
+compile time. It's described in
+
+C. W. Fraser, D. R. Hanson and T. A. Proebsting,
+Engineering a simple, efficient code generator generator,
+ACM Letters on Prog. Languages and Systems 1, 3 (Sep. 1992), 213-226.
+http://www.research.microsoft.com/~drh/pubs/iburg.pdf
 
 iburg is available for anonymous ftp from ftp.cs.princeton.edu in
 /pub/packages/iburg.tar.gz or /pub/packages/iburg.zip. Both archives
@@ -7,7 +14,7 @@ contain the following files.
 
 README		this file
 COPYRIGHT	copyright notice
-LOG		summary of most recent changes
+LOG		Summary of most recent changes
 makefile	Make specification
 custom.mk	empty makefile customization
 iburg.c		source code for most of iburg
@@ -15,23 +22,14 @@ gram.y		YACC input for burg grammars
 gram.c		YACC output (for those without YACC or bison)
 iburg.h		header file for iburg.c and gram.y
 iburg.1		iburg man page
-burg.ps		PostScript for
-		C. W. Fraser, R. R. Henry and T. A. Proebsting,
-		"BURG -- Fast optimal instruction selection and tree parsing,"
-		SIGPLAN Notices 27, 4 (Apr. 1992), 68-76. 9 pages.
-iburg.ps	PostScript for
-		C. W. Fraser, D. R. Hanson and T. A. Proebsting,
-		"Engineering a simple, efficient code generator generator,"
-		ACM Letters on Programming Languages and Systems 1,
-		3, (Sep. 1992), 213-226. (Also available as PDF at
-		http://www.research.microsoft.com/~drh/pubs/iburg.pdf.)
 *.brg		test files
-RCS/*		RCS archives
 
-iburg is written in and generates ANSI C and thus must be compiled with
-an ANSI C compiler and preprocessor, e.g., gcc or lcc. To compile
+iburg is written in and generates ANSI C and thus must be compiled
+with an ANSI C compiler and preprocessor, e.g., gcc or lcc. To compile
 iburg, type "make". There should be no warnings or errors (except
-perhaps in the system-dependent YACC skeleton).
+perhaps in the system-dependent YACC skeleton). If you need to
+customize the makefile, edit custom.mk, which is included in makefile.
+The default custom.mk is empty.
 
 sample.brg is from the paper in burg.ps, sample4.brg is from the paper
 in iburg.ps, and sample5.brg is an example from a compilers course.
@@ -70,15 +68,7 @@ directories, e.g., on UNIX:
 "make clobber" removes the executables and all derived files except
 gram.c; "make clean" removes just object, core, and sample*.c files.
 
-To be added to the iburg mailing list, which announces new versions,
-etc., send a message with the 1-line body
-
-subscribe iburg
-
-to majordomo@cs.princeton.edu. This line must appear in the message
-body; `Subject:' lines are ignored.
-
 Mail bug reports along with the shortest input that exposes them to
 drh@microsoft.com.
 
-$Id: README 48 1997-08-12 17:48:21Z drh $
+$Id: README 56 2002-08-29 23:31:01Z drh $
