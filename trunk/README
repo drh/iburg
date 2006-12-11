@@ -2,7 +2,7 @@ pkg/iburg -- created Fri Mar 24 11:44:53 EST 1995 by drh
 current owner drh
 
 iburg is available for anonymous ftp from ftp.cs.princeton.edu
-(128.112.152.13) in pub/packages/iburg.tar.gz or
+(128.112.169.21) in pub/packages/iburg.tar.gz or
 pub/packages/iburg.zip. Both archives contain the following files.
 
 README		this file
@@ -77,4 +77,4 @@ body; `Subject:' lines are ignored.
 Mail bug reports along with the shortest input that exposes them to
 drh@cs.princeton.edu.
 
-$Id: README 35 1996-05-27 20:41:20Z drh $
+$Id: README 38 1996-06-04 17:10:18Z drh $
