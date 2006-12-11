@@ -2,11 +2,15 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctype.h>
 #include <string.h>
 #include <limits.h>
 #include "iburg.h"
 
-static char rcsid[] = "$Id: iburg.c 22 1996-05-02 19:33:03Z drh $";
+static char rcsid[] = "$Id: iburg.c 32 1996-05-07 21:14:49Z drh $";
+
+int maxcost = SHRT_MAX;
+
 static char *prefix = "burm";
 static int Iflag = 0, Tflag = 0;
 static int ntnumber = 0;
@@ -40,17 +44,21 @@ int main(int argc, char *argv[]) {
 	int c, i;
 	Nonterm p;
 	
+	if (sizeof (short) == sizeof (int))
+		maxcost = SHRT_MAX/2;
 	for (i = 1; i < argc; i++)
 		if (strcmp(argv[i], "-I") == 0)
 			Iflag = 1;
 		else if (strcmp(argv[i], "-T") == 0)
 			Tflag = 1;
+		else if (strncmp(argv[i], "-maxcost=", 9) == 0 && isdigit(argv[i][9]))
+			maxcost = atoi(argv[i] + 9);
 		else if (strncmp(argv[i], "-p", 2) == 0 && argv[i][2])
 			prefix = &argv[i][2];
 		else if (strncmp(argv[i], "-p", 2) == 0 && i + 1 < argc)
 			prefix = argv[++i];
 		else if (*argv[i] == '-' && argv[i][1]) {
-			yyerror("usage: %s [-T | -I | -p prefix]... [ [ input ] output \n",
+			yyerror("usage: %s [-T | -I | -p prefix | -maxcost=ddd ]... [ [ input ] output \n",
 				argv[0]);
 			exit(1);
 		} else if (infp == NULL) {
@@ -545,7 +553,7 @@ static void emitleaf(Term p, int ntnumber) {
 		rule = alloc((ntnumber + 1)*sizeof *rule);
 	}
 	for (i = 0; i <= ntnumber; i++) {
-		cost[i] = SHRT_MAX;
+		cost[i] = maxcost;
 		rule[i] = NULL;
 	}
 	for (r = p->rules; r; r = r->next)
@@ -556,7 +564,7 @@ static void emitleaf(Term p, int ntnumber) {
 		}
 	print("%2{\n%3static struct %Pstate z = { %d, 0, 0,\n%4{%10,\n", p->esn);
 	for (i = 1; i <= ntnumber; i++)
-		if (cost[i] < SHRT_MAX)
+		if (cost[i] < maxcost)
 			print("%5%d,%1/* %R */\n", cost[i], rule[i]);
 		else
 			print("%5%d,\n", cost[i]);
@@ -658,7 +666,7 @@ static void emitstate(Term terms, Nonterm start, int ntnumber) {
 "%2p->op = op;\n%2p->left = l;\n%2p->right = r;\n%2p->rule.%P%S = 0;\n", start);
 	for (i = 1; i <= ntnumber; i++)
 		print("%2p->cost[%d] =\n", i);
-	print("%3%d;\n%1}\n%1switch (op) {\n", SHRT_MAX);
+	print("%3%d;\n%1}\n%1switch (op) {\n", maxcost);
 	for (p = terms; p; p = p->link)
 		emitcase(p, ntnumber);
 	print("%1default:\n"
