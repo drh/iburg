@@ -8,22 +8,6 @@ Engineering a simple, efficient code generator generator,
 ACM Letters on Prog. Languages and Systems 1, 3 (Sep. 1992), 213-226.
 http://storage.webhop.net/documents/iburg.pdf
 
-iburg is available for anonymous ftp from ftp.cs.princeton.edu in
-/pub/packages/iburg.tar.gz or /pub/packages/iburg.zip. Both archives
-contain the following files.
-
-README		this file
-COPYRIGHT	copyright notice
-LOG		Summary of most recent changes
-makefile	Make specification
-custom.mk	empty makefile customization
-iburg.c		source code for most of iburg
-gram.y		YACC input for burg grammars
-gram.c		YACC output (for those without YACC or bison)
-iburg.h		header file for iburg.c and gram.y
-iburg.1		iburg man page
-*.brg		test files
-
 iburg is written in and generates ANSI C and thus must be compiled
 with an ANSI C compiler and preprocessor, e.g., gcc or lcc. To compile
 iburg, type "make". There should be no warnings or errors (except
