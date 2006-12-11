@@ -1,45 +1,66 @@
-<!DOCTYPE HTML PUBLIC "-//SQ//DTD HTML 2.0 HoTMetaL + extensions//EN">
-<HTML>
-<HEAD><LINK HREF="mailto:drh@microsoft.com" REV="made" TITLE="David R. Hanson">
-<TITLE>iburg, A Tree Parser Generator</TITLE></HEAD>
-<BODY>
-<H1>iburg, A Tree Parser Generator</H1>
-<P><CODE>iburg</CODE> is a program that generates fast tree parsers for
-cost-augmented tree grammars.
-<CODE>iburg</CODE> is useful for writing code generators and for teaching
-computer science compiler courses. A variant of <CODE>iburg</CODE> is used in
-the code generators for
-<A HREF="/software/lcc/"><CODE>lcc</CODE></A>, a retargetable compiler for
-ANSI C. <CODE>iburg</CODE> is described in</P>
-<BLOCKQUOTE>
-<P><A HREF="http://www.research.microsoft.com/~cwfraser/">C. W. Fraser</A>,
-<A HREF="http://www.research.microsoft.com/~drh/">D. R. Hanson</A>, and
-<A HREF="http://www.research.microsoft.com/~toddpro/">T. A. Proebsting</A>, &quot;Engineering
-a Simple, Efficient Code Generator Generator,&quot; <I>ACM Letters on
-Programming Languages and Systems</I> <B>1</B>, 3 (Sep. 1992), 213-226.</P></BLOCKQUOTE>
-<P><A HREF="iburg.pdf">PDF</A> (157KB) and <A HREF="iburg.ps.gz">Compressed
-Postscript</A> (59KB) for this paper is available. The source code is available
-in 
-<A HREF="ftp://ftp.cs.princeton.edu/pub/packages/iburg.tar.gz"><CODE>iburg.tar.gz</CODE></A>
-(142KB) or <A HREF="ftp://ftp.cs.princeton.edu/pub/packages/iburg.zip"><CODE>iburg.zip</CODE></A>
-(149KB); the <CODE><A HREF="pkg/README">README</A></CODE> file elaborates. The
-<CODE><A HREF="pkg/LOG">LOG</A></CODE> file describes recent changes. You can
-also <A HREF="iburg.1.txt">read the man page</A> (an ASCII file) and
-<A HREF="pkg">browse the source code</A>.</P>
-<P>There is an <CODE>iburg</CODE> mailing list. To be added to the list, send
-a message with the 1-line body</P>
-<BLOCKQUOTE>
-<PRE>subscribe iburg</PRE></BLOCKQUOTE>
-<P>to <VAR>majordomo@cs.princeton.edu</VAR>.  This line must appear in the
-message body; `Subject:' lines are ignored. To learn more about mailing lists 
-served by majordomo, send a message with the body `<CODE>help</CODE>' to <VAR>majordomo@cs.princeton.edu</VAR>.</P>
-<P>Mail sent to <VAR>iburg@cs.princeton.edu</VAR> is forwarded to everyone on
-the mailing list.</P>
-<HR>
-<ADDRESS><A HREF="http://www.research.microsoft.com/~cwfraser/">Chris Fraser</A> / <A
-HREF="mailto:cwfraser@microsoft.com">cwfraser@microsoft.com</A><BR><A
-HREF="http://www.research.microsoft.com/~drh/">David Hanson</A> / <A
-HREF="mailto:drh@microsoft.com">drh@microsoft.com</A><BR><A
-HREF="http://www.research.microsoft.com/~toddpro/">Todd Proebsting</A> / <A
-HREF="mailto:toddpro@microsoft.com">toddpro@microsoft.com</A></ADDRESS>
-<ADDRESS>$Revision: 49 $ $Date: 1997-08-12 11:01:55 -0700 (Tue, 12 Aug 1997) $</ADDRESS></BODY></HTML>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+
+<head>
+<link HREF="mailto:drh@microsoft.com" REV="made" TITLE="David R. Hanson">
+<title>iburg, A Tree Parser Generator</title>
+</head>
+
+<body>
+
+<h1>iburg, A Tree Parser Generator</h1>
+
+<p><code>iburg</code> is a program that generates fast tree parsers for cost-augmented
+tree grammars. <code>iburg</code> is useful for writing code generators and for teaching
+computer science compiler courses. A variant of <code>iburg</code> is used in the code
+generators for <a HREF="/software/lcc/"><code>lcc</code></a>, a retargetable compiler for
+ANSI C. <code>iburg</code> is described in</p>
+
+<blockquote>
+  <p><a HREF="http://www.research.microsoft.com/~cwfraser/">C. W. Fraser</a>, <a
+  HREF="http://www.research.microsoft.com/~drh/">D. R. Hanson</a>, and <a
+  HREF="http://www.research.microsoft.com/~toddpro/">T. A. Proebsting</a>,<br>
+  Engineering a Simple, Efficient Code Generator Generator,<br>
+  <cite>ACM Letters on Programming Languages and Systems</cite> &nbsp;<strong>1</strong>, 3
+  (Sep. 1992), 213-226.</p>
+</blockquote>
+
+<p><a HREF="iburg.pdf">PDF</a> (157KB) and <a HREF="iburg.ps.gz">Compressed Postscript</a>
+(59KB) for this paper is available. The source code is available in <a
+HREF="ftp://ftp.cs.princeton.edu/pub/packages/iburg.tar.gz"><code>iburg.tar.gz</code></a>
+(142KB) or <a HREF="ftp://ftp.cs.princeton.edu/pub/packages/iburg.zip"><code>iburg.zip</code></a>
+(149KB); the <code><a HREF="pkg/README">README</a></code> file elaborates. The <code><a
+HREF="pkg/LOG">LOG</a></code> file describes recent changes. You can also <a
+HREF="iburg.1.txt">read the man page</a> (an ASCII file) and <a HREF="pkg">browse the
+source code</a>.</p>
+
+<p>There is an <code>iburg</code> mailing list. To be added to the list, send a message
+with the 1-line body</p>
+
+<blockquote>
+  <pre>subscribe iburg</pre>
+</blockquote>
+
+<p>to <var>majordomo@cs.princeton.edu</var>. This line must appear in the message body;
+&quot;Subject:&quot; lines are ignored. To learn more about mailing lists served by
+majordomo, send a message with the body &quot;<code>help</code>&quot; to <var>majordomo@cs.princeton.edu</var>.</p>
+
+<p>Mail sent to <a href="mailto:iburg@cs.princeton.edu"><var>iburg@cs.princeton.edu</var></a>
+is forwarded to everyone on the mailing list.</p>
+
+<hr>
+
+<address>
+  <a HREF="http://www.research.microsoft.com/~cwfraser/">Chris Fraser</a> / <a
+  HREF="mailto:cwfraser@microsoft.com">cwfraser@microsoft.com</a><br>
+  <a HREF="http://www.research.microsoft.com/~drh/">David Hanson</a> / <a
+  HREF="mailto:drh@microsoft.com">drh@microsoft.com</a><br>
+  <a HREF="http://www.research.microsoft.com/~toddpro/">Todd Proebsting</a> / <a
+  HREF="mailto:toddpro@microsoft.com">toddpro@microsoft.com</a> 
+</address>
+
+<address>
+  $Revision: 52 $ $Date: 1998-02-06 10:58:07 -0800 (Fri, 06 Feb 1998) $ 
+</address>
+</body>
+</html>
