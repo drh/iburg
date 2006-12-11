@@ -7,7 +7,7 @@
 #include <limits.h>
 #include "iburg.h"
 
-static char rcsid[] = "$Id: iburg.c 32 1996-05-07 21:14:49Z drh $";
+static char rcsid[] = "$Id$";
 
 int maxcost = SHRT_MAX;
 

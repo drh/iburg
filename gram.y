@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include "iburg.h"
-static char rcsid[] = "$Id: gram.y 69 2005-12-27 06:18:03Z drh-iburg $";
+static char rcsid[] = "$Id$";
 static int yylineno = 0;
 %}
 %union {

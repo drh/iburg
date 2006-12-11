@@ -55,4 +55,4 @@ gram.c; "make clean" removes just object, core, and sample*.c files.
 Mail bug reports along with the shortest input that exposes them to
 drh@drhanson.net.
 
-$Id: README 69 2005-12-27 06:18:03Z drh-iburg $
+$Id$

@@ -1,7 +1,7 @@
 #ifndef BURG_INCLUDED
 #define BURG_INCLUDED
 
-/* $Id: iburg.h 33 1996-05-07 21:14:49Z drh $ */
+/* $Id$ */
 /* iburg.c: */
 extern void *alloc(int nbytes);
 
