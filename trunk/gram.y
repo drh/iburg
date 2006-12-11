@@ -1,8 +1,9 @@
 %{
 #include <string.h>
 #include <stdio.h>
+#include <limits.h>
 #include "iburg.h"
-static char rcsid[] = "$Id: gram.y 30 1996-05-07 21:14:49Z drh $";
+static char rcsid[] = "$Id: gram.y 44 1997-08-12 17:02:20Z drh $";
 static int yylineno = 0;
 %}
 %union {
@@ -74,9 +75,10 @@ static int ppercent = 0;
 
 static int get(void) {
 	if (*bp == 0) {
+		bp = buf;
+		*bp = 0;
 		if (fgets(buf, sizeof buf, infp) == NULL)
 			return EOF;
-		bp = buf;
 		yylineno++;
 		while (buf[0] == '%' && buf[1] == '{' && buf[2] == '\n') {
 			for (;;) {
@@ -135,25 +137,28 @@ int yylex(void) {
 		} else if (isdigit(c)) {
 			int n = 0;
 			do {
-				n = 10*n + (c - '0');
+				int d = c - '0';
+				if (n > (INT_MAX - d)/10)
+					yyerror("integer greater than %d\n", INT_MAX);
+				else
+					n = 10*n + d;
 				c = get();
-			} while (isdigit(c));
+			} while (c != EOF && isdigit(c));
 			bp--;
 			yylval.n = n;
 			return INT;
 		} else if (isalpha(c)) {
 			char *p = bp - 1;
-			while (isalpha(c) || isdigit(c) || c == '_')
-				c = get();
-			bp--;
+			while (isalpha(*bp) || isdigit(*bp) || *bp == '_')
+				bp++;
 			yylval.string = alloc(bp - p + 1);
 			strncpy(yylval.string, p, bp - p);
 			yylval.string[bp - p] = 0;
 			return ID;
 		} else if (isprint(c))
-			yyerror("illegal character `%c'\n", c);
+			yyerror("invalid character `%c'\n", c);
 		else
-			yyerror("illegal character `\0%o'\n", c);
+			yyerror("invalid character `\\%03o'\n", (unsigned char)c);
 	}
 	return 0;
 }
