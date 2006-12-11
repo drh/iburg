@@ -49,11 +49,11 @@ static int trace;
 /* burm_trace - print trace message for matching p; decrement trace */
 static void burm_trace(NODEPTR_TYPE p, int eruleno, int cost, int bestcost) {
 	if (trace < 0)
-		fprintf(stderr, "0x%x matched %s = %d with cost %d vs. %d\n", p,
+		fprintf(stderr, "0x%p matched %s = %d with cost %d vs. %d\n", p,
 			burm_string[eruleno], eruleno, cost, bestcost);
 	else if (trace > 0 && cost < bestcost) {
 		--trace;
-		fprintf(stderr, "0x%x matched %s = %d with cost %d\n", p,
+		fprintf(stderr, "0x%p matched %s = %d with cost %d\n", p,
 			burm_string[eruleno], eruleno, cost);
 	}
 }
