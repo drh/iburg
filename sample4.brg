@@ -7,11 +7,12 @@ enum {
 	CNSTI=21, CVCI=85, I0I=661, INDIRC=67
 };
 
+#define STATE_TYPE long
 typedef struct tree {
 	int op;
 	struct tree *kids[2];
 	int val;
-	struct { int state; } x;
+	struct { STATE_TYPE state; } x;
 } *NODEPTR_TYPE, *Tree;
 #define LEFT_CHILD(p) ((p)->kids[0])
 #define RIGHT_CHILD(p) ((p)->kids[1])
