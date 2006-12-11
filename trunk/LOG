@@ -1,3 +1,14 @@
+Tue Aug 12 10:03:34 PDT 1997
+
+makefile:
+Customized for use under NT.
+
+gram.y:
+Fixed diagnostic formatting, handled cases when \n doesn't terminate
+the input buffer; protected against versions of fgets that touch
+buffer at EOF.
+
+
 Tue May  7 14:20:11 PDT 1996
 
 The distribution now includes the RCS files.
