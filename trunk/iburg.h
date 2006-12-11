@@ -1,7 +1,7 @@
 #ifndef BURG_INCLUDED
 #define BURG_INCLUDED
 
-/* $Id: iburg.h 2 1993-01-29 22:04:04Z drh $ */
+/* $Id: iburg.h 6 1993-03-27 11:42:21Z drh $ */
 /* iburg.c: */
 extern void *alloc(int nbytes);
 
@@ -33,8 +33,9 @@ extern Term term(char *id, int esn);
 
 typedef struct tree *Tree;
 struct tree {		/* tree patterns: */
-	void *op;		/* a term or non-terminal */
+	void *op;		/* a terminal or non-terminal */
 	Tree left, right;	/* operands */
+	int nterms;		/* number of terminal nodes in this tree */
 };
 extern Tree tree(char *op, Tree left, Tree right);
 
