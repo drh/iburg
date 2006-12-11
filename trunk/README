@@ -67,9 +67,14 @@ directories, e.g.,
 `make clean' removes just .o, core, and sample*.c files.
 
 To be added to the iburg mailing list, which announces new versions,
-etc., send your preferred email address to drh@cs.princeton.edu.
+etc., send a message with the 1-line body
+
+subscribe iburg
+
+to majordomo@cs.princeton.edu. This line must appear in the message
+body; `Subject:' lines are ignored.
 
 Mail bug reports along with the shortest input that exposes them to
 drh@cs.princeton.edu.
 
-$Id: README 26 1996-05-03 20:50:16Z drh $
+$Id: README 27 1996-05-07 18:05:28Z drh $
