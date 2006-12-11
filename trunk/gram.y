@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <limits.h>
 #include "iburg.h"
-static char rcsid[] = "$Id: gram.y 44 1997-08-12 17:02:20Z drh $";
+static char rcsid[] = "$Id: gram.y 69 2005-12-27 06:18:03Z drh-iburg $";
 static int yylineno = 0;
 %}
 %union {
@@ -80,14 +80,14 @@ static int get(void) {
 		if (fgets(buf, sizeof buf, infp) == NULL)
 			return EOF;
 		yylineno++;
-		while (buf[0] == '%' && buf[1] == '{' && buf[2] == '\n') {
+		while (buf[0] == '%' && buf[1] == '{' && (buf[2] == '\n' || buf[2] == '\r')) {
 			for (;;) {
 				if (fgets(buf, sizeof buf, infp) == NULL) {
 					yywarn("unterminated %{...%}\n");
 					return EOF;
 				}
 				yylineno++;
-				if (strcmp(buf, "%}\n") == 0)
+				if (strcmp(buf, "%}\n") == 0 || strcmp(buf, "%}\r\n") == 0)
 					break;
 				fputs(buf, outfp);
 			}
@@ -116,7 +116,7 @@ int yylex(void) {
 
 	while ((c = get()) != EOF) {
 		switch (c) {
-		case ' ': case '\f': case '\t':
+		case ' ': case '\f': case '\t': case '\r':
 			continue;
 		case '\n':
 		case '(': case ')': case ',':

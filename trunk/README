@@ -1,4 +1,4 @@
-Iburg -- A Code Generator Generator
+iburg -- A Code Generator Generator
 
 iburg is a code-generator generator that uses dynamic programming at
 compile time. It's described in
@@ -69,6 +69,6 @@ directories, e.g., on UNIX:
 gram.c; "make clean" removes just object, core, and sample*.c files.
 
 Mail bug reports along with the shortest input that exposes them to
-drh@microsoft.com.
+drh@drhanson.net.
 
-$Id: README 67 2005-03-22 18:55:30Z drh-iburg $
+$Id: README 69 2005-12-27 06:18:03Z drh-iburg $
